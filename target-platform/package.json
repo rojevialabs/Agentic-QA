@@ -1,0 +1,12 @@
+{
+  "name": "target-platform",
+  "private": true,
+  "workspaces": ["auth-service", "catalog-service", "cart-service", "order-service", "payment-service"],
+  "scripts": {
+    "start:all": "node scripts/start-all.js",
+    "test": "node --test shared/kit.test.js && npm test --workspaces"
+  },
+  "devDependencies": {
+    "express": "^4.21.2"
+  }
+}
