@@ -1,0 +1,133 @@
+llama3.2:3b        v2_renamed      #0  OK  conf=0.95 locator='#add-to-bag-btn' 8.54s
+llama3.2:3b        v2_renamed      #1  BAD conf=0.8 locator='#add-to-cart-btn' 9.11s
+llama3.2:3b        v2_renamed      #2  BAD conf=0.9 locator='#add-to-cart-btn' 9.07s
+llama3.2:3b        v2_renamed      #3  OK  conf=0.8 locator="button[id='add-to-bag-btn']" 11.78s
+llama3.2:3b        v2_renamed      #4  OK  conf=0.9 locator='button[data-product-id]' 11.79s
+llama3.2:3b        v2_renamed      #5  OK  conf=0.95 locator='#add-to-bag-btn' 8.89s
+llama3.2:3b        v2_renamed      #6  OK  conf=0.9 locator='#add-to-bag-btn' 7.24s
+llama3.2:3b        v2_renamed      #7  BAD conf=0.8 locator='#add-to-bag-btn | button[data-product-id]' 16.09s
+llama3.2:3b        v2_renamed      #8  BAD conf=0.9 locator='button:has-text("Add to Cart")' 11.58s
+llama3.2:3b        v2_renamed      #9  OK  conf=0.9 locator="button:has-text('Add to Bag')" 11.37s
+llama3.2:3b        v2_renamed      #10 BAD conf=None locator=None 11.06s
+llama3.2:3b        v2_renamed      #11 BAD conf=0.9 locator="button:has-text('Add to Cart')" 12.82s
+llama3.2:3b        v2_renamed      #12 BAD conf=0.9 locator='#add-to-cart-btn' 8.33s
+llama3.2:3b        v2_renamed      #13 OK  conf=0.9 locator='#add-to-bag-btn' 8.24s
+llama3.2:3b        v2_renamed      #14 BAD conf=0.8 locator='button:has-text("Add to Cart")' 10.91s
+llama3.2:3b        v2_renamed      #15 BAD conf=0.8 locator='#add-to-cart-btn' 9.85s
+llama3.2:3b        v2_renamed      #16 BAD conf=None locator=None 11.51s
+llama3.2:3b        v2_renamed      #17 OK  conf=0.95 locator='#add-to-bag-btn' 9.96s
+llama3.2:3b        v2_renamed      #18 OK  conf=0.9 locator='#add-to-bag-btn' 12.8s
+llama3.2:3b        v2_renamed      #19 BAD conf=0.9 locator='#add-to-cart-btn' 9.01s
+llama3.2:3b        decoy_wishlist  #0  OK  conf=0.8 locator='.product-action-btn' 13.88s
+llama3.2:3b        decoy_wishlist  #1  OK  conf=0.7 locator='button.wishlist-btn' 10.16s
+llama3.2:3b        decoy_wishlist  #2  OK  conf=0.9 locator='.btn-add-to-cart' 8.81s
+llama3.2:3b        decoy_wishlist  #3  BAD conf=0.9 locator='button.wishlist-btn' 9.58s
+llama3.2:3b        decoy_wishlist  #4  OK  conf=0.7 locator='button.wishlist-btn' 10.72s
+llama3.2:3b        decoy_wishlist  #5  OK  conf=0.8 locator='button.wishlist-btn | button:has-text("Add to Basket")' 11.67s
+llama3.2:3b        decoy_wishlist  #6  OK  conf=0.8 locator='button.wishlist-btn | button[data-product-id]' 12.5s
+llama3.2:3b        decoy_wishlist  #7  OK  conf=0.5 locator='button:wishlist-btn' 8.86s
+llama3.2:3b        decoy_wishlist  #8  OK  conf=0.9 locator='button[wishlist-btn]' 8.97s
+llama3.2:3b        decoy_wishlist  #9  BAD conf=0.8 locator='button.wishlist-btn' 10.68s
+llama3.2:3b        decoy_wishlist  #10 OK  conf=0.5 locator='button.wishlist-btn' 8.84s
+llama3.2:3b        decoy_wishlist  #11 OK  conf=0.5 locator='button.wishlist-btn' 11.67s
+llama3.2:3b        decoy_wishlist  #12 OK  conf=0.9 locator='.product-action' 10.82s
+llama3.2:3b        decoy_wishlist  #13 BAD conf=0.8 locator='button.wishlist-btn' 10.55s
+llama3.2:3b        decoy_wishlist  #14 BAD conf=0.8 locator='button.wishlist-btn' 9.59s
+llama3.2:3b        decoy_wishlist  #15 OK  conf=0.5 locator='button:has-text("Add to Cart")' 15.9s
+llama3.2:3b        decoy_wishlist  #16 OK  conf=0.85 locator='button[wishlist-btn]' 8.7s
+llama3.2:3b        decoy_wishlist  #17 BAD conf=0.8 locator='button.wishlist-btn' 10.11s
+llama3.2:3b        decoy_wishlist  #18 OK  conf=0.8 locator='button[wishlist-btn]' 12.85s
+llama3.2:3b        decoy_wishlist  #19 BAD conf=0.9 locator='.wishlist-btn' 9.78s
+llama3.1:8b        v2_renamed      #0  BAD conf=0.7 locator='#add-to-bag-btn' 66.19s
+llama3.1:8b        v2_renamed      #1  OK  conf=0.8 locator='#add-to-bag-btn' 16.07s
+llama3.1:8b        v2_renamed      #2  OK  conf=0.9 locator='#add-to-bag-btn' 29.19s
+llama3.1:8b        v2_renamed      #3  OK  conf=0.8 locator='#add-to-bag-btn' 24.81s
+llama3.1:8b        v2_renamed      #4  OK  conf=0.8 locator='#add-to-bag-btn' 23.48s
+llama3.1:8b        v2_renamed      #5  OK  conf=0.8 locator='#add-to-bag-btn' 19.39s
+llama3.1:8b        v2_renamed      #6  OK  conf=0.8 locator='#add-to-bag-btn' 20.07s
+llama3.1:8b        v2_renamed      #7  OK  conf=0.9 locator='#add-to-bag-btn' 24.18s
+llama3.1:8b        v2_renamed      #8  OK  conf=0.9 locator='#add-to-bag-btn' 18.44s
+llama3.1:8b        v2_renamed      #9  OK  conf=0.9 locator='#add-to-bag-btn' 19.33s
+llama3.1:8b        v2_renamed      #10 OK  conf=0.8 locator='#add-to-bag-btn' 22.48s
+llama3.1:8b        v2_renamed      #11 OK  conf=0.8 locator='button[data-product-id]' 17.57s
+llama3.1:8b        v2_renamed      #12 OK  conf=0.8 locator='#add-to-bag-btn' 24.8s
+llama3.1:8b        v2_renamed      #13 OK  conf=0.8 locator='#add-to-bag-btn' 27.17s
+llama3.1:8b        v2_renamed      #14 OK  conf=0.9 locator='#add-to-bag-btn' 23.61s
+llama3.1:8b        v2_renamed      #15 OK  conf=0.8 locator='button[data-product-id]' 22.95s
+llama3.1:8b        v2_renamed      #16 OK  conf=0.9 locator='#add-to-bag-btn' 20.23s
+llama3.1:8b        v2_renamed      #17 BAD conf=0.7 locator='#add-to-bag-btn' 22.41s
+llama3.1:8b        v2_renamed      #18 BAD conf=0.7 locator="button:has-text('Add to Cart')" 17.97s
+llama3.1:8b        v2_renamed      #19 OK  conf=0.9 locator='#add-to-bag-btn' 19.31s
+llama3.1:8b        decoy_wishlist  #0  BAD conf=0.8 locator='button[data-product-id]' 36.91s
+llama3.1:8b        decoy_wishlist  #1  OK  conf=0.8 locator="button:has-text('Add to Cart')" 27.57s
+llama3.1:8b        decoy_wishlist  #2  BAD conf=0.8 locator='button[data-product-id]' 21.39s
+llama3.1:8b        decoy_wishlist  #3  OK  conf=0.8 locator="button:has-text('Add to Cart')" 25.49s
+llama3.1:8b        decoy_wishlist  #4  BAD conf=0.8 locator='button[data-product-id]' 20.42s
+llama3.1:8b        decoy_wishlist  #5  OK  conf=0.7 locator="button:has-text('Add to Cart')" 26.45s
+llama3.1:8b        decoy_wishlist  #6  OK  conf=0.5 locator="button:has-text('Add to Cart')" 28.74s
+llama3.1:8b        decoy_wishlist  #7  OK  conf=0.8 locator="button:has-text('Add to Cart')" 18.26s
+llama3.1:8b        decoy_wishlist  #8  OK  conf=0.7 locator='button:has-text("Add to")' 23.75s
+llama3.1:8b        decoy_wishlist  #9  OK  conf=0.5 locator='button.wishlist-btn' 23.86s
+llama3.1:8b        decoy_wishlist  #10 BAD conf=0.8 locator='button[data-product-id]' 18.34s
+llama3.1:8b        decoy_wishlist  #11 OK  conf=0.5 locator='button.wishlist-btn' 18.52s
+llama3.1:8b        decoy_wishlist  #12 BAD conf=0.9 locator='button[data-product-id]' 25.24s
+llama3.1:8b        decoy_wishlist  #13 BAD conf=0.8 locator='button.wishlist-btn' 21.69s
+llama3.1:8b        decoy_wishlist  #14 OK  conf=0.7 locator="button:has-text('Add to Cart')" 21.3s
+llama3.1:8b        decoy_wishlist  #15 OK  conf=0.5 locator='button.wishlist-btn' 22.63s
+llama3.1:8b        decoy_wishlist  #16 OK  conf=0.8 locator="button[data-product-id]:not([data-product-id='p-100'])" 24.59s
+llama3.1:8b        decoy_wishlist  #17 OK  conf=0.8 locator="button:has-text('Add to Cart')" 22.94s
+llama3.1:8b        decoy_wishlist  #18 OK  conf=0.8 locator="button:has-text('Add to Cart')" 23.29s
+llama3.1:8b        decoy_wishlist  #19 BAD conf=0.8 locator='button[data-product-id]' 15.63s
+qwen2.5-coder:7b   v2_renamed      #0  OK  conf=0.9 locator="button:has-text('Add to Bag')" 72.75s
+qwen2.5-coder:7b   v2_renamed      #1  OK  conf=0.9 locator="button:has-text('Add to Bag')" 29.38s
+qwen2.5-coder:7b   v2_renamed      #2  BAD conf=0.9 locator="button[data-product-id] | button:has-text('Add to Bag')" 30.46s
+qwen2.5-coder:7b   v2_renamed      #3  OK  conf=1.0 locator='button[data-product-id]' 27.85s
+qwen2.5-coder:7b   v2_renamed      #4  OK  conf=0.9 locator='button[data-product-id]' 23.83s
+qwen2.5-coder:7b   v2_renamed      #5  BAD conf=0.2 locator=None 23.55s
+qwen2.5-coder:7b   v2_renamed      #6  OK  conf=0.9 locator="button:has-text('Add to Bag')" 27.52s
+qwen2.5-coder:7b   v2_renamed      #7  BAD conf=0.2 locator=None 25.35s
+qwen2.5-coder:7b   v2_renamed      #8  BAD conf=0.2 locator=None 21.1s
+qwen2.5-coder:7b   v2_renamed      #9  OK  conf=1.0 locator='#add-to-bag-btn' 17.22s
+qwen2.5-coder:7b   v2_renamed      #10 OK  conf=0.9 locator="button:has-text('Add to Bag')" 23.16s
+qwen2.5-coder:7b   v2_renamed      #11 BAD conf=0.7 locator="button:has-text('Add to Bag')" 24.64s
+qwen2.5-coder:7b   v2_renamed      #12 BAD conf=0.2 locator=None 22.85s
+qwen2.5-coder:7b   v2_renamed      #13 OK  conf=0.9 locator='button:has-text("Add to Bag")' 24.11s
+qwen2.5-coder:7b   v2_renamed      #14 BAD conf=0.2 locator=None 25.15s
+qwen2.5-coder:7b   v2_renamed      #15 OK  conf=0.8 locator="button:has-text('Add to Bag')" 29.52s
+qwen2.5-coder:7b   v2_renamed      #16 BAD conf=0.9 locator="button[data-product-id] | button:has-text('Add to Bag')" 25.62s
+qwen2.5-coder:7b   v2_renamed      #17 OK  conf=0.9 locator='button[data-product-id]' 28.41s
+qwen2.5-coder:7b   v2_renamed      #18 OK  conf=0.9 locator='#add-to-bag-btn' 29.46s
+qwen2.5-coder:7b   v2_renamed      #19 BAD conf=0.7 locator='button[data-product-id]' 23.19s
+qwen2.5-coder:7b   decoy_wishlist  #0  OK  conf=0.2 locator=None 48.21s
+qwen2.5-coder:7b   decoy_wishlist  #1  BAD conf=0.9 locator='button:has-text("Add to Wishlist")' 24.18s
+qwen2.5-coder:7b   decoy_wishlist  #2  BAD conf=1.0 locator='button:has-text("Add to Wishlist")' 28.6s
+qwen2.5-coder:7b   decoy_wishlist  #3  OK  conf=0.2 locator=None 26.3s
+qwen2.5-coder:7b   decoy_wishlist  #4  OK  conf=0.2 locator=None 23.84s
+qwen2.5-coder:7b   decoy_wishlist  #5  OK  conf=0.8 locator="button[data-product-id] | button.wishlist-btn | button:has-text('Add to Wishlist')" 23.92s
+qwen2.5-coder:7b   decoy_wishlist  #6  BAD conf=0.9 locator="button:has-text('Add to Wishlist')" 22.54s
+qwen2.5-coder:7b   decoy_wishlist  #7  OK  conf=0.2 locator=None 26.57s
+qwen2.5-coder:7b   decoy_wishlist  #8  OK  conf=0.9 locator="button:has-text('Add to Cart')" 27.96s
+qwen2.5-coder:7b   decoy_wishlist  #9  OK  conf=0.2 locator=None 23.26s
+qwen2.5-coder:7b   decoy_wishlist  #10 BAD conf=0.9 locator='button.wishlist-btn' 25.37s
+qwen2.5-coder:7b   decoy_wishlist  #11 BAD conf=0.9 locator='button[data-product-id]' 21.8s
+qwen2.5-coder:7b   decoy_wishlist  #12 OK  conf=0.2 locator=None 20.48s
+qwen2.5-coder:7b   decoy_wishlist  #13 OK  conf=0.1 locator=None 24.76s
+qwen2.5-coder:7b   decoy_wishlist  #14 BAD conf=0.8 locator='button.wishlist-btn' 28.69s
+qwen2.5-coder:7b   decoy_wishlist  #15 OK  conf=0.2 locator=None 26.04s
+qwen2.5-coder:7b   decoy_wishlist  #16 OK  conf=0.2 locator=None 14.35s
+qwen2.5-coder:7b   decoy_wishlist  #17 OK  conf=0.1 locator=None 17.12s
+qwen2.5-coder:7b   decoy_wishlist  #18 OK  conf=0.7 locator='button.wishlist-btn' 28.04s
+qwen2.5-coder:7b   decoy_wishlist  #19 OK  conf=0.2 locator=None 24.09s
+
+Threshold 0.8. `correct` = heal auto-applies with a verified generic locator (v2) / no auto-apply (decoy). `locator ok` ignores confidence.
+
+| model | scenario | n | parsed | correct | locator ok | would apply | LLM refused | rescued by verify | mean conf | median s | p90 s |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| llama3.2:3b | v2_renamed | 20 | 18/20 | **9/20** | 9/20 | 9/20 | 2/20 | 9/20 | 0.88 | 10.4 | 12.8 |
+| llama3.2:3b | decoy_wishlist | 20 | 20/20 | **14/20** | 0/20 | 6/20 | 6/20 | 8/20 | 0.76 | 10.4 | 13.8 |
+| llama3.1:8b | v2_renamed | 20 | 20/20 | **17/20** | 19/20 | 17/20 | 3/20 | 0/20 | 0.82 | 22.4 | 29.0 |
+| llama3.1:8b | decoy_wishlist | 20 | 20/20 | **13/20** | 0/20 | 7/20 | 7/20 | 6/20 | 0.73 | 23.1 | 28.6 |
+| qwen2.5-coder:7b | v2_renamed | 20 | 20/20 | **11/20** | 13/20 | 11/20 | 7/20 | 2/20 | 0.71 | 25.2 | 30.4 |
+| qwen2.5-coder:7b | decoy_wishlist | 20 | 20/20 | **14/20** | 0/20 | 6/20 | 12/20 | 2/20 | 0.49 | 24.5 | 28.7 |
+
+results: C:\BITS\autopilot-qa-project\evaluation\spikes\healer-3b\results-20260927T160635Z.jsonl

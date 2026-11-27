@@ -70,4 +70,24 @@ function publicUrls(env = process.env) {
   };
 }
 
-module.exports = { SID_COOKIE, parseCookies, ensureSid, sidCookieHeader, cors, escapeHtml, render, publicUrls };
+// Evaluation hooks (test-only): seeded UI changes and defects, see evaluation/seeded-bugs/registry.json.
+function seededChanges(env = process.env) {
+  return new Set(String(env.SEEDED_CHANGES || '').split(',').map((s) => s.trim()).filter(Boolean));
+}
+
+// GET/POST /api/__config lets the experiment runner switch seeded changes without restarting the service.
+function configRoutes(app, service, changes) {
+  const describe = () => ({ service, seeded_changes: [...changes] });
+  app.get('/api/__config', (req, res) => res.json(describe()));
+  app.post('/api/__config', (req, res) => {
+    const list = req.body && req.body.seeded_changes;
+    if (!Array.isArray(list)) return res.status(400).json({ error: 'seeded_changes must be an array' });
+    changes.clear();
+    for (const change of list) changes.add(String(change));
+    res.json(describe());
+  });
+}
+
+module.exports = {
+  SID_COOKIE, parseCookies, ensureSid, sidCookieHeader, cors, escapeHtml, render, publicUrls, seededChanges, configRoutes,
+};

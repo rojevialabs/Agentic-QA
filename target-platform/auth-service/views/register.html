@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>Register · ShopLite</title></head>
+<body>
+  <nav>
+    <a id="nav-catalog" href="{{CATALOG_URL}}/catalog.html">Catalog</a> |
+    <a id="nav-login" href="{{AUTH_URL}}/login.html">Log in</a>
+  </nav>
+  <h1>Create an account</h1>
+  <form id="register-form" novalidate>
+    <label for="email">Email</label>
+    <input id="email" name="email" type="email">
+    <label for="password">Password</label>
+    <input id="password" name="password" type="password">
+    <button id="register-btn" type="submit">Register</button>
+  </form>
+  <p id="message" role="status"></p>
+  <script>
+    const ERRORS = {
+      invalid_email: 'Please enter a valid email',
+      password_too_short: 'Password must be at least 8 characters',
+      email_taken: 'An account with this email already exists',
+    };
+    document.getElementById('register-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const res = await fetch('/api/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: e.target.email.value, password: e.target.password.value }),
+      });
+      const msg = document.getElementById('message');
+      if (res.ok) {
+        msg.textContent = 'Account created';
+        msg.dataset.state = 'success';
+      } else {
+        const { error } = await res.json();
+        msg.textContent = ERRORS[error] || 'Registration failed';
+        msg.dataset.state = 'error';
+      }
+    });
+  </script>
+</body>
+</html>

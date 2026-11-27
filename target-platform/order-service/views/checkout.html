@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>Checkout · ShopLite</title></head>
+<body>
+  <nav>
+    <a id="nav-catalog" href="{{CATALOG_URL}}/catalog.html">Catalog</a> |
+    <a id="nav-cart" href="{{CART_URL}}/cart.html">Cart</a>
+  </nav>
+  <h1>Checkout</h1>
+  <p>Order total: <span id="checkout-total">{{TOTAL}}</span></p>
+  <form id="checkout-form" novalidate>
+    <label for="ship-name">Full name</label> <input id="ship-name" name="name">
+    <label for="ship-address">Address</label> <input id="ship-address" name="address">
+    <label for="ship-city">City</label> <input id="ship-city" name="city">
+    <label for="ship-zip">Postcode</label> <input id="ship-zip" name="zip">
+    {{{PLACE_ORDER_BUTTON}}}
+  </form>
+  <p id="checkout-message" role="status"></p>
+  <script>
+    const ERRORS = { cart_empty: 'Your cart is empty', invalid_shipping: 'Please fill in all shipping fields' };
+    const value = (id) => document.getElementById(id).value;
+    document.getElementById('checkout-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const shipping = { name: value('ship-name'), address: value('ship-address'), city: value('ship-city'), zip: value('ship-zip') };
+      const res = await fetch('/api/orders', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ shipping }),
+      });
+      const body = await res.json();
+      if (res.ok) {
+        location.href = '{{PAYMENT_URL}}/payment.html?orderId=' + encodeURIComponent(body.orderId) + '&amount=' + body.total;
+        return;
+      }
+      const msg = document.getElementById('checkout-message');
+      msg.textContent = ERRORS[body.error] || 'Could not place order';
+      msg.dataset.state = 'error';
+    });
+  </script>
+</body>
+</html>

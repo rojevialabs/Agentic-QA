@@ -1,0 +1,18 @@
+llama3.1:8b        decoy_wishlist  #0  OK  conf=0.2 locator=None 24.73s
+llama3.1:8b        decoy_wishlist  #1  OK  conf=0.2 locator=None 18.62s
+llama3.1:8b        decoy_wishlist  #2  OK  conf=0.2 locator=None 18.07s
+llama3.1:8b        decoy_wishlist  #3  OK  conf=0.2 locator=None 21.85s
+llama3.1:8b        decoy_wishlist  #4  OK  conf=0.0 locator=None 21.13s
+llama3.1:8b        decoy_wishlist  #5  OK  conf=0.0 locator=None 22.93s
+llama3.1:8b        decoy_wishlist  #6  OK  conf=0.0 locator=None 22.15s
+llama3.1:8b        decoy_wishlist  #7  OK  conf=0.1 locator=None 26.04s
+llama3.1:8b        decoy_wishlist  #8  OK  conf=0.0 locator=None 23.15s
+llama3.1:8b        decoy_wishlist  #9  BAD conf=0.8 locator='button[data-product-id]' 25.82s
+
+Threshold 0.8. `correct` = heal auto-applies with a verified generic locator (v2) / no auto-apply (decoy). `locator ok` ignores confidence.
+
+| model | scenario | n | parsed | correct | locator ok | would apply | LLM refused | rescued by verify | mean rounds | mean conf | median s | p90 s |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| llama3.1:8b | decoy_wishlist | 10 | 10/10 | **9/10** | 0/10 | 1/10 | 9/10 | 0/10 | 1.00 | 0.17 | 22.5 | 26.0 |
+
+results: C:\BITS\autopilot-qa-project\evaluation\spikes\healer-3b\results-engine-v2-20260927T170745Z.jsonl

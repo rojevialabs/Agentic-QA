@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>Cart · ShopLite</title></head>
+<body>
+  <nav>
+    <a id="nav-catalog" href="{{CATALOG_URL}}/catalog.html">Catalog</a> |
+    <a id="nav-cart" href="{{CART_URL}}/cart.html">Cart</a>
+  </nav>
+  <h1>Your cart</h1>
+  <p id="empty-cart" {{EMPTY_HIDDEN}}>Your cart is empty</p>
+  <table id="cart-table">
+    <thead><tr><th>Product</th><th>Qty</th><th>Price</th><th></th></tr></thead>
+    <tbody>
+{{{CART_ROWS}}}
+    </tbody>
+  </table>
+  <p>Total: <span id="cart-total">${{TOTAL}}</span></p>
+  {{{CHECKOUT_BUTTON}}}
+  <script>
+    document.getElementById('cart-table').addEventListener('click', async (e) => {
+      const btn = e.target.closest('.remove-btn');
+      if (!btn) return;
+      await fetch('/api/cart/' + encodeURIComponent(btn.dataset.itemId), { method: 'DELETE' });
+      location.reload();
+    });
+    document.querySelector('#checkout-btn, #proceed-btn')?.addEventListener('click', () => {
+      location.href = '{{ORDER_URL}}/checkout.html';
+    });
+  </script>
+</body>
+</html>

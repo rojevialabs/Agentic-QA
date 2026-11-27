@@ -1,0 +1,72 @@
+{
+  "version": 1,
+  "services": {
+    "auth": {
+      "base_url_env": "AUTH_SERVICE_URL",
+      "pages": { "login": "/login.html", "register": "/register.html" },
+      "elements": {
+        "emailInput": { "selector": "#email", "description": "email text field on the login and register forms" },
+        "passwordInput": { "selector": "#password", "description": "password field on the login and register forms" },
+        "loginButton": { "selector": "#login-btn", "description": "button labelled 'Log in' that submits the login form" },
+        "registerButton": { "selector": "#register-btn", "description": "button labelled 'Register' that submits the register form" },
+        "message": { "selector": "#message", "description": "status text shown after submitting ('Logged in', 'Invalid email or password', 'Account created', ...)" }
+      }
+    },
+    "catalog": {
+      "base_url_env": "CATALOG_SERVICE_URL",
+      "pages": { "catalog": "/catalog.html" },
+      "elements": {
+        "searchInput": { "selector": "#search-input", "description": "search text box above the product list" },
+        "searchButton": { "selector": "#search-btn", "description": "button labelled 'Search' that submits the search" },
+        "resultCount": { "selector": "#result-count", "description": "text '<n> products' giving the number of listed products" },
+        "productCard": { "selector": ".product-card", "description": "list item for one product; filter it by product name" },
+        "productName": { "selector": ".product-name", "scope": "productCard", "description": "product name heading inside a product card" },
+        "productPrice": { "selector": ".product-price", "scope": "productCard", "description": "price text like '$59.99' inside a product card" },
+        "productStock": { "selector": ".product-stock", "scope": "productCard", "description": "'In stock' or 'Out of stock' inside a product card" },
+        "addToCartButton": { "selector": "#add-to-cart-btn", "scope": "productCard", "description": "button labelled 'Add to Cart' that adds this card's product to the cart; disabled when out of stock" },
+        "cartMessage": { "selector": "#cart-message", "description": "status text after adding, e.g. 'Added Wireless Headphones to cart'" },
+        "cartCount": { "selector": "#cart-count", "description": "number of items in the cart shown in the nav bar" },
+        "noResults": { "selector": "#no-results", "description": "'No products found' shown when a search matches nothing" }
+      }
+    },
+    "cart": {
+      "base_url_env": "CART_SERVICE_URL",
+      "pages": { "cart": "/cart.html" },
+      "elements": {
+        "cartItem": { "selector": ".cart-item", "description": "table row for one cart line; filter it by product name" },
+        "itemName": { "selector": ".item-name", "scope": "cartItem", "description": "product name in a cart row" },
+        "itemQty": { "selector": ".item-qty", "scope": "cartItem", "description": "quantity in a cart row" },
+        "itemPrice": { "selector": ".item-price", "scope": "cartItem", "description": "line price like '$59.99' in a cart row" },
+        "removeButton": { "selector": ".remove-btn", "scope": "cartItem", "description": "button labelled 'Remove' in a cart row" },
+        "cartTotal": { "selector": "#cart-total", "description": "cart total like '$59.99'" },
+        "emptyCart": { "selector": "#empty-cart", "description": "'Your cart is empty' message, visible only when the cart is empty" },
+        "checkoutButton": { "selector": "#checkout-btn", "description": "button labelled 'Proceed to Checkout'; disabled when the cart is empty" }
+      }
+    },
+    "order": {
+      "base_url_env": "ORDER_SERVICE_URL",
+      "pages": { "checkout": "/checkout.html" },
+      "elements": {
+        "shipName": { "selector": "#ship-name", "description": "shipping full name field" },
+        "shipAddress": { "selector": "#ship-address", "description": "shipping address field" },
+        "shipCity": { "selector": "#ship-city", "description": "shipping city field" },
+        "shipZip": { "selector": "#ship-zip", "description": "shipping postcode field" },
+        "placeOrderButton": { "selector": "#place-order-btn", "description": "button labelled 'Place Order'; on success navigates to the payment page" },
+        "checkoutTotal": { "selector": "#checkout-total", "description": "order total like '$59.99'" },
+        "checkoutMessage": { "selector": "#checkout-message", "description": "error text such as 'Your cart is empty' or 'Please fill in all shipping fields'" }
+      }
+    },
+    "payment": {
+      "base_url_env": "PAYMENT_SERVICE_URL",
+      "pages": { "payment": "/payment.html" },
+      "elements": {
+        "orderId": { "selector": "#order-id", "description": "order id being paid, e.g. 'ord-1a2b3c4d'" },
+        "amount": { "selector": "#amount", "description": "amount due like '$59.99'" },
+        "cardNumber": { "selector": "#card-number", "description": "16-digit card number field" },
+        "expiry": { "selector": "#expiry", "description": "card expiry field in MM/YY format" },
+        "payButton": { "selector": "#pay-btn", "description": "button labelled 'Pay' that submits the payment" },
+        "paymentStatus": { "selector": "#payment-status", "description": "'Payment approved' or 'Payment declined: <reason>'" }
+      }
+    }
+  }
+}

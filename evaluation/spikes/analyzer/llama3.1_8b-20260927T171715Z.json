@@ -1,0 +1,156 @@
+{
+  "model": "llama3.1:8b",
+  "runs": [
+    {
+      "requirement": "User can search for a product, add it to cart, and complete checkout.",
+      "seconds": 158.6,
+      "error": null,
+      "test_cases": [
+        {
+          "type": "positive",
+          "title": "Search for a product, add to cart, and complete checkout",
+          "steps": [
+            "Open the catalog page",
+            "Type 'p-100' in the search input",
+            "Click 'Search'",
+            "Click 'Add to Cart' on p-100 Wireless Headphones",
+            "Open the cart page",
+            "Click 'Proceed to Checkout'",
+            "Click 'Continue' on the checkout page",
+            "Fill in shipping details: name, address, city, zip",
+            "Fill in payment details: card number, expiry, and CVV",
+            "Click 'Pay Now' on the payment page"
+          ],
+          "expected_result": "The order is successfully placed and the cart is empty"
+        },
+        {
+          "type": "negative",
+          "title": "Checkout fails with an expired card",
+          "steps": [
+            "Open the catalog page",
+            "Type 'p-100' in the search input",
+            "Click 'Search'",
+            "Click 'Add to Cart' on p-100 Wireless Headphones",
+            "Open the cart page",
+            "Click 'Proceed to Checkout'",
+            "Click 'Continue' on the checkout page",
+            "Fill in shipping details: name, address, city, zip",
+            "Fill in payment details: expired card number, expiry, and CVV"
+          ],
+          "expected_result": "'Payment declined: card expired' is shown"
+        },
+        {
+          "type": "boundary",
+          "title": "Checkout fails with a card that has a future expiry date",
+          "steps": [
+            "Open the catalog page",
+            "Type 'p-100' in the search input",
+            "Click 'Search'",
+            "Click 'Add to Cart' on p-100 Wireless Headphones",
+            "Open the cart page",
+            "Click 'Proceed to Checkout'",
+            "Click 'Continue' on the checkout page",
+            "Fill in shipping details: name, address, city, zip",
+            "Fill in payment details: card number with future expiry, and CVV"
+          ],
+          "expected_result": "'Payment declined: card expired' is shown"
+        }
+      ]
+    },
+    {
+      "requirement": "User can log in with valid credentials and sees an error with a wrong password.",
+      "seconds": 59.2,
+      "error": null,
+      "test_cases": [
+        {
+          "type": "positive",
+          "title": "Valid login with correct password",
+          "steps": [
+            "Open the login page",
+            "Enter 'demo@shop.test' in the email field",
+            "Enter 'demo1234' in the password field",
+            "Click 'Login'"
+          ],
+          "expected_result": "The user is logged in and the 'Welcome, demo@shop.test' message is shown"
+        },
+        {
+          "type": "negative",
+          "title": "Invalid password shows an error",
+          "steps": [
+            "Open the login page",
+            "Enter 'demo@shop.test' in the email field",
+            "Enter 'wrongpassword' in the password field",
+            "Click 'Login'"
+          ],
+          "expected_result": "'Invalid password' error message is shown"
+        },
+        {
+          "type": "boundary",
+          "title": "Empty password shows an error",
+          "steps": [
+            "Open the login page",
+            "Enter 'demo@shop.test' in the email field",
+            "Leave the password field empty",
+            "Click 'Login'"
+          ],
+          "expected_result": "'Password is required' error message is shown"
+        }
+      ]
+    },
+    {
+      "requirement": "Payment is declined when the card is expired.",
+      "seconds": 91.7,
+      "error": null,
+      "test_cases": [
+        {
+          "type": "positive",
+          "title": "Expired card declines payment",
+          "steps": [
+            "Open the catalog page",
+            "Click 'Add to Cart' on p-100 Wireless Headphones",
+            "Open the cart page",
+            "Click 'Proceed to Checkout'",
+            "Open the checkout page",
+            "Click 'Continue to Payment'",
+            "Open the payment page",
+            "Fill in card number: 4111111111111111, expiry: 01/20",
+            "Click 'Pay'"
+          ],
+          "expected_result": "'Payment declined: card expired' is shown"
+        },
+        {
+          "type": "negative",
+          "title": "Valid card completes payment",
+          "steps": [
+            "Open the catalog page",
+            "Click 'Add to Cart' on p-100 Wireless Headphones",
+            "Open the cart page",
+            "Click 'Proceed to Checkout'",
+            "Open the checkout page",
+            "Click 'Continue to Payment'",
+            "Open the payment page",
+            "Fill in card number: 4111111111111111, expiry: 12/30",
+            "Click 'Pay'"
+          ],
+          "expected_result": "'Payment successful' is shown"
+        },
+        {
+          "type": "boundary",
+          "title": "Card with expiry at the end of the month is accepted",
+          "steps": [
+            "Open the catalog page",
+            "Click 'Add to Cart' on p-100 Wireless Headphones",
+            "Open the cart page",
+            "Click 'Proceed to Checkout'",
+            "Open the checkout page",
+            "Click 'Continue to Payment'",
+            "Open the payment page",
+            "Fill in card number: 4111111111111111, expiry: 12/31",
+            "Click 'Pay'"
+          ],
+          "expected_result": "'Payment successful' is shown"
+        }
+      ]
+    }
+  ]
+}

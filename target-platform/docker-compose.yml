@@ -1,0 +1,46 @@
+# ShopLite target platform + MongoDB for AutoPilot-QA.
+# Browser-facing URLs stay on localhost (see PUBLIC_*_URL defaults); service-to-service calls use compose DNS.
+services:
+  mongo:
+    image: mongo:7
+    ports: ["27017:27017"]
+    volumes: [mongo-data:/data/db]
+
+  auth-service:
+    build: { context: ., args: { SERVICE: auth-service } }
+    environment: { PORT: "4001" }
+    ports: ["4001:4001"]
+
+  catalog-service:
+    build: { context: ., args: { SERVICE: catalog-service } }
+    environment:
+      PORT: "4002"
+      CATALOG_BUTTON_VARIANT: ${CATALOG_BUTTON_VARIANT:-v1}
+    ports: ["4002:4002"]
+
+  cart-service:
+    build: { context: ., args: { SERVICE: cart-service } }
+    environment:
+      PORT: "4003"
+      CATALOG_SERVICE_URL: http://catalog-service:4002
+    ports: ["4003:4003"]
+    depends_on: [catalog-service]
+
+  order-service:
+    build: { context: ., args: { SERVICE: order-service } }
+    environment:
+      PORT: "4004"
+      CART_SERVICE_URL: http://cart-service:4003
+    ports: ["4004:4004"]
+    depends_on: [cart-service]
+
+  payment-service:
+    build: { context: ., args: { SERVICE: payment-service } }
+    environment:
+      PORT: "4005"
+      ORDER_SERVICE_URL: http://order-service:4004
+    ports: ["4005:4005"]
+    depends_on: [order-service]
+
+volumes:
+  mongo-data: {}

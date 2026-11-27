@@ -1,0 +1,55 @@
+{
+  "db": "autopilot_qa_eval",
+  "runs": [
+    {
+      "suite": "generated",
+      "requirement": "User can search for a product, add it to cart, and complete checkout.",
+      "requirement_id": "6ab9654863402b99fc94113b",
+      "run_id": "55cef395-f7b4-4461-8a9d-75a16960c39d",
+      "status": "completed",
+      "scripts": 3,
+      "valid_script_ids": [
+        "6ab966d463402b99fc941144",
+        "6ab9670d63402b99fc941149"
+      ]
+    },
+    {
+      "suite": "generated",
+      "requirement": "Payment is declined when the card is expired.",
+      "requirement_id": "6ab96039b422692ff66c7efc",
+      "run_id": "33663029-70e1-4ffd-8e66-b61cb70202f0",
+      "status": "escalated",
+      "scripts": 2,
+      "valid_script_ids": [
+        "6ab9641ab422692ff66c7f0d",
+        "6ab9646bb422692ff66c7f12"
+      ]
+    },
+    {
+      "requirement": "Out-of-stock products cannot be added to the cart.",
+      "requirement_id": "6ab95db33acad6832b1dd428",
+      "run_id": "726f3f7e-3665-4afa-9b0d-ed5bc9b96928",
+      "status": "completed",
+      "scripts": 3,
+      "valid_script_ids": [
+        "6ab95ed03acad6832b1dd436"
+      ],
+      "suite": "generated"
+    },
+    {
+      "suite": "reference",
+      "requirement": "Reference suite (hand-written scripts with logical selector keys)",
+      "requirement_id": "6ab9602fc64b3c4a43cad70d",
+      "run_id": "2350beab-cfbd-4178-8358-e5e5a5bb50c7",
+      "status": "completed",
+      "scripts": 5,
+      "valid_script_ids": [
+        "6ab9602fc64b3c4a43cad70f",
+        "6ab9602fc64b3c4a43cad711",
+        "6ab9602fc64b3c4a43cad713",
+        "6ab9602fc64b3c4a43cad715",
+        "6ab9602fc64b3c4a43cad717"
+      ]
+    }
+  ]
+}

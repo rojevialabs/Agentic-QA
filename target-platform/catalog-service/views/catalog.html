@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>Catalog · ShopLite</title></head>
+<body>
+  <nav>
+    <a id="nav-catalog" href="{{CATALOG_URL}}/catalog.html">Catalog</a> |
+    <a id="nav-cart" href="{{CART_URL}}/cart.html">Cart (<span id="cart-count">0</span>)</a> |
+    <a id="nav-login" href="{{AUTH_URL}}/login.html">Log in</a>
+  </nav>
+  <h1>Catalog</h1>
+  <form id="search-form" method="get" action="/catalog.html">
+    <label for="{{SEARCH_ID}}">Search</label>
+    <input id="{{SEARCH_ID}}" name="q" type="search" value="{{QUERY}}">
+    <button id="search-btn" type="submit">Search</button>
+  </form>
+  <p id="result-count">{{RESULT_COUNT}} products</p>
+  <ul id="product-list">
+{{{PRODUCT_CARDS}}}
+  </ul>
+  <p id="cart-message" role="status"></p>
+  <script>
+    const CART_URL = '{{CART_URL}}';
+    async function refreshCount() {
+      const res = await fetch(CART_URL + '/api/cart', { credentials: 'include' });
+      if (!res.ok) return;
+      const { items } = await res.json();
+      document.getElementById('cart-count').textContent = items.reduce((n, i) => n + i.qty, 0);
+    }
+    // Delegated on data-product-id, so the handler is identical for the v1 and v2 button.
+    document.getElementById('product-list').addEventListener('click', async (e) => {
+      const btn = e.target.closest('button[data-product-id]');
+      if (!btn) return;
+      const name = btn.closest('.product-card').querySelector('.product-name').textContent;
+      const msg = document.getElementById('cart-message');
+      if (btn.classList.contains('wishlist-btn')) {
+        msg.textContent = `Saved ${name} to wishlist`;
+        msg.dataset.state = 'success';
+        return;
+      }
+      if (btn.classList.contains('compare-btn')) {
+        msg.textContent = `Added ${name} to comparison`;
+        msg.dataset.state = 'success';
+        return;
+      }
+      const res = await fetch(CART_URL + '/api/cart/add', {
+        method: 'POST',
+        credentials: 'include',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ productId: btn.dataset.productId, qty: 1 }),
+      });
+      msg.textContent = res.ok ? `Added ${name} to cart` : `Could not add ${name} to cart`;
+      msg.dataset.state = res.ok ? 'success' : 'error';
+      refreshCount();
+    });
+    refreshCount();
+  </script>
+</body>
+</html>

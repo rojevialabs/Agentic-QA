@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>Log in · ShopLite</title></head>
+<body>
+  <nav>
+    <a id="nav-catalog" href="{{CATALOG_URL}}/catalog.html">Catalog</a> |
+    <a id="nav-cart" href="{{CART_URL}}/cart.html">Cart</a> |
+    <a id="nav-register" href="{{AUTH_URL}}/register.html">Register</a>
+  </nav>
+  <h1>Log in</h1>
+  <form id="login-form" novalidate>
+    <label for="email">Email</label>
+    <input id="email" name="email" type="email">
+    <label for="password">Password</label>
+    <input id="password" name="password" type="password">
+    <button id="login-btn" type="submit">Log in</button>
+  </form>
+  <p id="message" role="status"></p>
+  <script>
+    document.getElementById('login-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const res = await fetch('/api/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: e.target.email.value, password: e.target.password.value }),
+      });
+      const msg = document.getElementById('message');
+      msg.textContent = res.ok ? 'Logged in' : 'Invalid email or password';
+      msg.dataset.state = res.ok ? 'success' : 'error';
+    });
+  </script>
+</body>
+</html>

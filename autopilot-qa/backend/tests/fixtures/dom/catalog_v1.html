@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>Catalog · ShopLite</title></head>
+<body>
+  <nav>
+    <a id="nav-catalog" href="http://localhost:4002/catalog.html">Catalog</a> |
+    <a id="nav-cart" href="http://localhost:4003/cart.html">Cart (<span id="cart-count">0</span>)</a> |
+    <a id="nav-login" href="http://localhost:4001/login.html">Log in</a>
+  </nav>
+  <h1>Catalog</h1>
+  <form id="search-form" method="get" action="/catalog.html">
+    <label for="search-input">Search</label>
+    <input id="search-input" name="q" type="search" value="">
+    <button id="search-btn" type="submit">Search</button>
+  </form>
+  <p id="result-count">6 products</p>
+  <ul id="product-list">
+    <li class="product-card" data-product-id="p-100">
+      <h2 class="product-name">Wireless Headphones</h2>
+      <p class="product-description">Over-ear bluetooth headphones with noise cancelling</p>
+      <span class="product-price">$59.99</span>
+      <span class="product-stock">In stock</span>
+      <button id="add-to-cart-btn" data-product-id="p-100">Add to Cart</button>
+    </li>
+    <li class="product-card" data-product-id="p-101">
+      <h2 class="product-name">Mechanical Keyboard</h2>
+      <p class="product-description">Tenkeyless keyboard with brown switches</p>
+      <span class="product-price">$89.50</span>
+      <span class="product-stock">In stock</span>
+      <button id="add-to-cart-btn" data-product-id="p-101">Add to Cart</button>
+    </li>
+    <li class="product-card" data-product-id="p-102">
+      <h2 class="product-name">USB-C Charger</h2>
+      <p class="product-description">65W fast charger</p>
+      <span class="product-price">$24.00</span>
+      <span class="product-stock">In stock</span>
+      <button id="add-to-cart-btn" data-product-id="p-102">Add to Cart</button>
+    </li>
+    <li class="product-card" data-product-id="p-103">
+      <h2 class="product-name">Running Shoes</h2>
+      <p class="product-description">Lightweight road running shoes</p>
+      <span class="product-price">$74.95</span>
+      <span class="product-stock">In stock</span>
+      <button id="add-to-cart-btn" data-product-id="p-103">Add to Cart</button>
+    </li>
+    <li class="product-card" data-product-id="p-104">
+      <h2 class="product-name">Coffee Grinder</h2>
+      <p class="product-description">Burr grinder with 18 settings</p>
+      <span class="product-price">$45.00</span>
+      <span class="product-stock">Out of stock</span>
+      <button id="add-to-cart-btn" data-product-id="p-104" disabled>Add to Cart</button>
+    </li>
+    <li class="product-card" data-product-id="p-105">
+      <h2 class="product-name">Yoga Mat</h2>
+      <p class="product-description">6mm non-slip exercise mat</p>
+      <span class="product-price">$19.99</span>
+      <span class="product-stock">In stock</span>
+      <button id="add-to-cart-btn" data-product-id="p-105">Add to Cart</button>
+    </li>
+  </ul>
+  <p id="cart-message" role="status"></p>
+  <script>
+    const CART_URL = 'http://localhost:4003';
+    async function refreshCount() {
+      const res = await fetch(CART_URL + '/api/cart', { credentials: 'include' });
+      if (!res.ok) return;
+      const { items } = await res.json();
+      document.getElementById('cart-count').textContent = items.reduce((n, i) => n + i.qty, 0);
+    }
+    // Delegated on data-product-id, so the handler is identical for the v1 and v2 button.
+    document.getElementById('product-list').addEventListener('click', async (e) => {
+      const btn = e.target.closest('button[data-product-id]');
+      if (!btn) return;
+      const name = btn.closest('.product-card').querySelector('.product-name').textContent;
+      const res = await fetch(CART_URL + '/api/cart/add', {
+        method: 'POST',
+        credentials: 'include',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ productId: btn.dataset.productId, qty: 1 }),
+      });
+      const msg = document.getElementById('cart-message');
+      msg.textContent = res.ok ? `Added ${name} to cart` : `Could not add ${name} to cart`;
+      msg.dataset.state = res.ok ? 'success' : 'error';
+      refreshCount();
+    });
+    refreshCount();
+  </script>
+</body>
+</html>

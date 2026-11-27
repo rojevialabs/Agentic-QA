@@ -1,0 +1,92 @@
+{
+  "version": 1,
+  "about": "Ground truth for the AutoPilot-QA evaluation. Each change is switched on in ShopLite with SEEDED_CHANGES=<id> or POST /api/__config {\"seeded_changes\": [\"<id>\"]}. A benign_ui_change keeps behaviour and must be healed; a real_defect changes behaviour and must be reported, never healed. The compare decoy is held out: it was never used while developing prompts (the wishlist decoy was the development decoy).",
+  "changes": [
+    {
+      "id": "catalog.add_button_renamed",
+      "label": "benign_ui_change",
+      "expected": "heal",
+      "selector_key": "catalog.addToCartButton",
+      "acceptable_locators": ["#add-to-bag-btn", "button[data-product-id]", "button:has-text(\"Add to Bag\")"],
+      "description": "Add to Cart button renamed: id add-to-bag-btn, label 'Add to Bag' (the spec's CATALOG_BUTTON_VARIANT=v2)."
+    },
+    {
+      "id": "catalog.search_input_renamed",
+      "label": "benign_ui_change",
+      "expected": "heal",
+      "selector_key": "catalog.searchInput",
+      "acceptable_locators": ["#query", "input[name=\"q\"]", "input[type=\"search\"]"],
+      "description": "Search box id changed from search-input to query; name and behaviour unchanged."
+    },
+    {
+      "id": "cart.checkout_button_renamed",
+      "label": "benign_ui_change",
+      "expected": "heal",
+      "selector_key": "cart.checkoutButton",
+      "acceptable_locators": ["#proceed-btn", "button:has-text(\"Proceed to Checkout\")"],
+      "description": "Proceed to Checkout button id changed from checkout-btn to proceed-btn."
+    },
+    {
+      "id": "order.place_order_renamed",
+      "label": "benign_ui_change",
+      "expected": "heal",
+      "selector_key": "order.placeOrderButton",
+      "acceptable_locators": ["#confirm-order-btn", "button:has-text(\"Confirm Order\")"],
+      "description": "Place Order button renamed: id confirm-order-btn, label 'Confirm Order'."
+    },
+    {
+      "id": "payment.pay_button_renamed",
+      "label": "benign_ui_change",
+      "expected": "heal",
+      "selector_key": "payment.payButton",
+      "acceptable_locators": ["#submit-payment-btn", "button:has-text(\"Pay now\")"],
+      "description": "Pay button renamed: id submit-payment-btn, label 'Pay now'."
+    },
+    {
+      "id": "catalog.add_button_wishlist",
+      "label": "real_defect",
+      "expected": "report",
+      "selector_key": "catalog.addToCartButton",
+      "held_out": false,
+      "description": "Add to Cart replaced by an 'Add to Wishlist' control that does not add to the cart (different purpose). Used as the development decoy in the healer spikes, so not held out."
+    },
+    {
+      "id": "catalog.add_button_compare",
+      "label": "real_defect",
+      "expected": "report",
+      "selector_key": "catalog.addToCartButton",
+      "held_out": true,
+      "description": "Add to Cart replaced by an 'Add to Compare' control (different purpose). Held out: never used during prompt development, unlike the wishlist decoy."
+    },
+    {
+      "id": "cart.checkout_button_missing",
+      "label": "real_defect",
+      "expected": "report",
+      "selector_key": "cart.checkoutButton",
+      "description": "The Proceed to Checkout button is missing from the cart page."
+    },
+    {
+      "id": "cart.total_doubled",
+      "label": "real_defect",
+      "expected": "report",
+      "description": "Pricing bug: every cart total is doubled."
+    },
+    {
+      "id": "payment.expired_card_accepted",
+      "label": "real_defect",
+      "expected": "report",
+      "description": "Expired cards are approved instead of declined."
+    },
+    {
+      "id": "catalog.out_of_stock_addable",
+      "label": "real_defect",
+      "expected": "report",
+      "description": "The add button of an out-of-stock product is enabled."
+    }
+  ],
+  "requirements": [
+    "User can search for a product, add it to cart, and complete checkout.",
+    "Payment is declined when the card is expired.",
+    "Out-of-stock products cannot be added to the cart."
+  ]
+}

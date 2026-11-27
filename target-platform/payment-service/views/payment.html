@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>Payment · ShopLite</title></head>
+<body>
+  <nav><a id="nav-catalog" href="{{CATALOG_URL}}/catalog.html">Catalog</a></nav>
+  <h1>Payment</h1>
+  <p>Order <span id="order-id">{{ORDER_ID}}</span> — amount due <span id="amount">${{AMOUNT}}</span></p>
+  <form id="payment-form" novalidate>
+    <label for="card-number">Card number</label> <input id="card-number" name="cardNumber" inputmode="numeric">
+    <label for="expiry">Expiry (MM/YY)</label> <input id="expiry" name="expiry" placeholder="MM/YY">
+    {{{PAY_BUTTON}}}
+  </form>
+  <p id="payment-status" role="status"></p>
+  <script>
+    const REASONS = {
+      card_expired: 'card expired',
+      invalid_card_number: 'invalid card number',
+      invalid_expiry: 'invalid expiry date',
+      invalid_amount: 'invalid amount',
+      order_not_found: 'order not found',
+      already_paid: 'order already paid',
+    };
+    document.getElementById('payment-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      // Order id and amount are read back from the rendered page, so no server value is embedded in script.
+      const orderId = document.getElementById('order-id').textContent || undefined;
+      const res = await fetch('/api/payments', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          cardNumber: e.target.cardNumber.value,
+          expiry: e.target.expiry.value,
+          amount: Number(document.getElementById('amount').textContent.replace('$', '')),
+          orderId,
+        }),
+      });
+      const body = await res.json();
+      const status = document.getElementById('payment-status');
+      status.textContent = res.ok ? 'Payment approved' : 'Payment declined: ' + (REASONS[body.error] || 'payment failed');
+      status.dataset.state = res.ok ? 'success' : 'error';
+    });
+  </script>
+</body>
+</html>

@@ -2144,3 +2144,15 @@ git commit -m "test(eval): manual Playwright baseline incl. reference flow and v
 - [ ] Baseline: v1 → 5 passed / 1 skipped; v2 → only the reference flow fails, on `#add-to-cart-btn`.
 - [ ] `docker compose up --build` starts 6 containers, and all five `__reset` calls answer.
 - [ ] Request a code review (superpowers:requesting-code-review) before starting the Phase 2 plan.
+
+---
+
+## Execution Notes (2026-09-27)
+
+Deviations from the code above, made during execution:
+- `order-service/views/checkout.html` reads fields with `document.getElementById(...)` instead of `form.name`-style named access.
+- `payment-service/views/payment.html` reads the order id and amount back from `#order-id` / `#amount` text, rather than embedding server values in script strings.
+- Added a root `.gitattributes` (`* text=auto eol=lf`).
+- On Windows, stopping a *background* `npm run start:all` does not stop its child `node` processes; stop them by port. Ctrl+C in a real terminal works normally.
+
+Results: `npm test` 48/48 passing. Baseline v1: 5 passed, 1 skipped. Baseline v2: only the reference flow fails, with `waiting for locator('.product-card').filter({ hasText: 'Wireless Headphones' }).locator('#add-to-cart-btn')`, and the v2 functional test passes. Docker Compose was validated with `docker compose config` only; it was not started, because Docker Desktop wasn't running.

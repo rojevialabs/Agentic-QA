@@ -8,6 +8,12 @@ playwright-report/
 artifacts/
 autopilot-qa/tests-generated/*
 !autopilot-qa/tests-generated/.gitkeep
+!autopilot-qa/tests-generated/package.json
+!autopilot-qa/tests-generated/package-lock.json
+!autopilot-qa/tests-generated/playwright.config.js
 !autopilot-qa/tests-generated/support/
+!autopilot-qa/tests-generated/examples/
+!autopilot-qa/tests-generated/reference/
 autopilot-qa/reports/*
 !autopilot-qa/reports/.gitkeep
+dist/

@@ -1,0 +1,135 @@
+{
+  "model": "llama3.1:8b",
+  "runs": [
+    {
+      "requirement": "User can search for a product, add it to cart, and complete checkout.",
+      "seconds": 127.8,
+      "error": null,
+      "test_cases": [
+        {
+          "type": "positive",
+          "title": "Searching for a product and completing checkout",
+          "steps": [
+            "Open the catalog page",
+            "Type 'headphones' in the search box and click 'Search'",
+            "Click 'Add to Cart' on p-100 Wireless Headphones",
+            "Open the cart page",
+            "Click 'Proceed to Checkout'",
+            "Fill in all shipping fields",
+            "Click 'Place Order'"
+          ],
+          "expected_result": "The browser goes straight to the payment page"
+        },
+        {
+          "type": "negative",
+          "title": "Checkout is unavailable when the cart is empty",
+          "steps": [
+            "Open the catalog page",
+            "Type 'headphones' in the search box and click 'Search'",
+            "Click 'Add to Cart' on p-100 Wireless Headphones",
+            "Open the cart page",
+            "Click 'Remove' on p-100 Wireless Headphones",
+            "Click 'Proceed to Checkout'"
+          ],
+          "expected_result": "'Your cart is empty' is shown and 'Proceed to Checkout' is disabled"
+        },
+        {
+          "type": "boundary",
+          "title": "Adding the last available unit of a product",
+          "steps": [
+            "Open the catalog page",
+            "Type 'charger' in the search box and click 'Search'",
+            "Click 'Add to Cart' on p-102 USB-C Charger",
+            "Open the cart page",
+            "Click 'Proceed to Checkout'"
+          ],
+          "expected_result": "The checkout page is shown"
+        }
+      ]
+    },
+    {
+      "requirement": "User can log in with valid credentials and sees an error with a wrong password.",
+      "seconds": 39.3,
+      "error": null,
+      "test_cases": [
+        {
+          "type": "positive",
+          "title": "Valid login",
+          "steps": [
+            "Open the login page",
+            "Enter 'demo@shop.test' in the Email field",
+            "Enter 'demo1234' in the Password field",
+            "Click 'Log in'"
+          ],
+          "expected_result": "'Logged in' is shown"
+        },
+        {
+          "type": "negative",
+          "title": "Wrong password",
+          "steps": [
+            "Open the login page",
+            "Enter 'demo@shop.test' in the Email field",
+            "Enter 'wrongpassword' in the Password field",
+            "Click 'Log in'"
+          ],
+          "expected_result": "'Invalid email or password' is shown"
+        }
+      ]
+    },
+    {
+      "requirement": "Payment is declined when the card is expired.",
+      "seconds": 92.1,
+      "error": null,
+      "test_cases": [
+        {
+          "type": "positive",
+          "title": "Expired card declines payment",
+          "steps": [
+            "Open the catalog page",
+            "Click 'Add to Cart' on p-100 Wireless Headphones",
+            "Open the cart page",
+            "Click 'Proceed to Checkout'",
+            "Open the checkout page",
+            "Fill in shipping fields",
+            "Open the payment page",
+            "Enter card number '4111111111111111', expiry '01/20'",
+            "Click 'Pay'"
+          ],
+          "expected_result": "'Payment declined: card expired' is shown"
+        },
+        {
+          "type": "negative",
+          "title": "Valid card completes payment",
+          "steps": [
+            "Open the catalog page",
+            "Click 'Add to Cart' on p-100 Wireless Headphones",
+            "Open the cart page",
+            "Click 'Proceed to Checkout'",
+            "Open the checkout page",
+            "Fill in shipping fields",
+            "Open the payment page",
+            "Enter card number '4111111111111111', expiry '12/30'",
+            "Click 'Pay'"
+          ],
+          "expected_result": "'Payment approved' is shown"
+        },
+        {
+          "type": "boundary",
+          "title": "Card with expiry in the next month is accepted",
+          "steps": [
+            "Open the catalog page",
+            "Click 'Add to Cart' on p-100 Wireless Headphones",
+            "Open the cart page",
+            "Click 'Proceed to Checkout'",
+            "Open the checkout page",
+            "Fill in shipping fields",
+            "Open the payment page",
+            "Enter card number '4111111111111111', expiry '02/30'",
+            "Click 'Pay'"
+          ],
+          "expected_result": "'Payment approved' is shown"
+        }
+      ]
+    }
+  ]
+}

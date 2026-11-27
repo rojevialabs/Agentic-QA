@@ -1,0 +1,6 @@
+llama3.1:8b        v2_renamed      #0  OK  conf=0.85 locator='button[data-product-id]' 33.87s
+llama3.1:8b        v2_renamed      #1  BAD conf=0.0 locator=None 22.01s
+llama3.1:8b        v2_renamed      #2  BAD conf=0.2 locator=None 20.25s
+llama3.1:8b        v2_renamed      #3  OK  conf=0.85 locator='#add-to-bag-btn' 30.1s
+llama3.1:8b        v2_renamed      #4  BAD conf=0.0 locator=None 20.69s
+llama3.1:8b        v2_renamed      #5  BAD conf=0.2 locator=None 25.59s

@@ -1,0 +1,8 @@
+[
+  { "id": "p-100", "name": "Wireless Headphones", "description": "Over-ear bluetooth headphones with noise cancelling", "price": 59.99, "stock": 12 },
+  { "id": "p-101", "name": "Mechanical Keyboard", "description": "Tenkeyless keyboard with brown switches", "price": 89.5, "stock": 5 },
+  { "id": "p-102", "name": "USB-C Charger", "description": "65W fast charger", "price": 24.0, "stock": 30 },
+  { "id": "p-103", "name": "Running Shoes", "description": "Lightweight road running shoes", "price": 74.95, "stock": 8 },
+  { "id": "p-104", "name": "Coffee Grinder", "description": "Burr grinder with 18 settings", "price": 45.0, "stock": 0 },
+  { "id": "p-105", "name": "Yoga Mat", "description": "6mm non-slip exercise mat", "price": 19.99, "stock": 20 }
+]

@@ -6,7 +6,7 @@
 
 **Architecture:** Two codebases in one repo. `target-platform/` is five Node/Express services with server-rendered HTML and in-memory stores. `autopilot-qa/` is a Python FastAPI backend: an async Orchestrator drives four specialist agents over a MongoDB capped-collection message bus, calls Ollama for inference, runs Playwright for execution, and streams THOUGHT lines to a React dashboard over WebSockets.
 
-**Tech Stack:** Node 22 + Express 4 (target), Python 3.12 + FastAPI + Motor + Pydantic v2 + httpx (backend), Ollama (`llama3.1:8b` / `qwen2.5-coder:7b`), Playwright (JS test runner), MongoDB 7, React + Vite + Recharts (dashboard).
+**Tech Stack:** Node 22 + Express 4 (target), Python 3.12 + FastAPI + PyMongo async (`AsyncMongoClient`; Motor is deprecated and past end of support) + Pydantic v2 + httpx (backend), Ollama (`llama3.1:8b` / `qwen2.5-coder:7b`), Playwright (JS test runner), MongoDB 7, React + Vite + Recharts (dashboard).
 
 ## Global Constraints
 
@@ -68,7 +68,7 @@ The headline feature (the Healer) is step 8 of 10. If the schedule slips, the th
 ### A.4 Environment findings (2026-09-27)
 
 - Node v22.21.0 ✔, Python 3.12.10 ✔, Docker 28.5.1 ✔.
-- **Ollama is not on PATH.** Install it from ollama.com (Windows installer) before Phase 3, then `ollama pull llama3.1:8b` and `ollama pull qwen2.5-coder:7b`. 8B models need about 8 GB free RAM/VRAM. On CPU only, expect 5–20 s per healer call, so budget evaluation runtime for it.
+- Ollama 0.34.4 installed (2026-09-27), server reachable, **no models pulled yet**. Hardware: Intel Iris Xe (integrated, no CUDA) + 20 GB RAM, so inference is **CPU-only**: expect roughly 3–8 tokens/s for 8B Q4 models. Phase 3b should also benchmark 3B models (`llama3.2:3b`, `qwen2.5-coder:3b`) and keep the Groq/Gemini backend behind C1 as a real fallback.
 - The repo is not a git repository yet (Phase 0).
 
 ---
@@ -321,3 +321,28 @@ Effort sizes are rough estimates for one developer working with a coding agent: 
 | 12 Local setup / env | Phase 1 Task 7, Phase 2 settings |
 | 13 Build order | Phases 1–10 (+3b inserted) |
 | 14 Out of scope | Global Constraints |
+
+## Part G — Progress Log
+
+| Date | Phase | Result |
+|------|-------|--------|
+| 2026-09-27 | 1 Target platform | Done. 48 unit tests; baseline v1 5 passed / 1 skipped; v2 fails only on `#add-to-cart-btn`. Compose file validated, not yet started. |
+| 2026-09-27 | 2 Data model | Done. 24 tests against local MongoDB 8.2.1 (Windows service); `init_db` idempotent. PyMongo `AsyncMongoClient` instead of Motor. Additive schema fields: `run_id` on scripts/executions/bug_reports, `status` on requirements, `path` on scripts, `healing` on executions, `notes` on bug_reports, plus `selector_maps`. |
+
+| 2026-09-27 | 3 LLM client | Done. 50 backend tests. Live: all 3 local models emit parseable THOUGHT/ACTION; llama3.2:3b fastest (11.5 s) and correct; llama3.1:8b correct but confidence 1.0; qwen2.5-coder proposed a product-specific selector. Details in the Phase 3 plan notes. |
+
+| 2026-09-27 | 3b Healer spike | v0 single-shot, 3 models × 2 scenarios × 20. llama3.1:8b best (17/20 v2, 7/20 decoy false heals). Healer model = llama3.1:8b. See `docs/spikes/healer-spike.md`. |
+| 2026-09-27 | 4 Requirement Analyzer | Done. Live: first run invented UI text → added the README `UI text` section to the context → second run fully grounded. |
+| 2026-09-27 | 5 Test Generator | Done. Live generation surfaced invented scoping, a guessed URL and a skipped field; the validator now enforces scopes, and prompt rules were tightened. |
+| 2026-09-27 | 6 Test Executor + CLI | Done. Live dry run: `1/1 passed` (third attempt, after the generator fixes). |
+| 2026-09-27 | 7 Orchestrator + API | Done. Live API run completed; 34 bus messages reconstruct it; re-execution works. |
+| 2026-09-27 | 8 Triage & Healer | Triage from real Playwright messages, engine (prompt v1, verification, feedback round), agent, **transactional healing** (a heal whose re-run fails is rolled back). Engine v1: 18/20 v2 ✅, 12/20 decoy false heals. Prompt v2 (explicit label comparison) trades recall for precision. Default stays v1 + rollback. **Live demos pass**: v2 heal → re-run pass; threshold 0.99 → pending_review + ui bug report. |
+| 2026-09-27 | 9 Live feed + dashboard | Done. The live feed streamed the healer's THOUGHTs; the dashboard replays the run (light, dark and mobile checked). |
+| 2026-09-27 | 10 Evaluation | 11 seeded changes (5 benign, 6 defects incl. a held-out decoy) behind `/api/__config`; registry; runner; metrics (7 tests); manual baseline run under all changes (fails on all 5 benign renames). Full experiment pending. |
+
+| 2026-09-28 | 10 Evaluation (running) | Two suites: **R** (5 hand-written reference scripts in the generated format, isolating the healer) and **G** (generated). Baseline validity = passes with no failure and no heal (a heal on the clean baseline had masked a script bug). New triage guard `wrong_page`. Trials: 11 changes × 3; metrics are written automatically to `evaluation/metrics/out/report.md`. |
+| 2026-09-28 | Demo | `docs/DEMO.md` (UI + terminal); dashboard **Demo controls** (seeded-change picker, reset healing, per-run threshold) backed by `/demo/*` endpoints; `npm run seed`, `scripts.demo_state`. Duplicate pending proposals merged. Tests: backend 199+, dashboard 11, platform 55. |
+
+**Design changes during execution (beyond G1–G20):** executor defaults to the latest active selector map; transactional healing (`rolled_back` selector maps); evaluation archives heals between trials; a held-out decoy (`catalog.add_button_compare`) because the wishlist decoy became the development set.
+
+**Environment note:** a local MongoDB service already listens on 27017. Before `docker compose up` in `target-platform/`, either stop that service or remove the `mongo` service/port from the compose file, or the ports will clash.

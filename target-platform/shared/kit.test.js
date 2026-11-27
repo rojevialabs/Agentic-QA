@@ -61,3 +61,24 @@ test('publicUrls defaults to localhost ports and honours overrides', () => {
   });
   assert.equal(kit.publicUrls({ PUBLIC_CART_URL: 'http://localhost:9003' }).CART_URL, 'http://localhost:9003');
 });
+
+test('seeded changes come from SEEDED_CHANGES and can be replaced through /api/__config', async () => {
+  const changes = kit.seededChanges({ SEEDED_CHANGES: ' cart.total_doubled, ,payment.expired_card_accepted ' });
+  assert.deepEqual([...changes], ['cart.total_doubled', 'payment.expired_card_accepted']);
+  const app = express();
+  app.use(express.json());
+  kit.configRoutes(app, 'cart', changes);
+  const svc = await startApp(app);
+  try {
+    const set = await fetch(`${svc.url}/api/__config`, { method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ seeded_changes: ['cart.checkout_button_missing'] }) });
+    assert.deepEqual(await set.json(), { service: 'cart', seeded_changes: ['cart.checkout_button_missing'] });
+    assert.deepEqual([...changes], ['cart.checkout_button_missing']);
+    const bad = await fetch(`${svc.url}/api/__config`, { method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ seeded_changes: 'nope' }) });
+    assert.equal(bad.status, 400);
+    assert.deepEqual(await (await fetch(`${svc.url}/api/__config`)).json(), { service: 'cart', seeded_changes: ['cart.checkout_button_missing'] });
+  } finally {
+    await svc.close();
+  }
+});

@@ -1,0 +1,98 @@
+{
+  "(none)": {
+    "user can search for a product, add it to cart, and complete checkout": "passed",
+    "expired payment card is declined": "passed",
+    "out-of-stock product cannot be added to cart": "passed",
+    "checkout is disabled for an empty cart": "passed",
+    "login rejects a wrong password": "passed",
+    "v2 \"Add to Bag\" button still adds the product to the cart": "skipped"
+  },
+  "catalog.add_button_renamed": {
+    "user can search for a product, add it to cart, and complete checkout": "failed",
+    "expired payment card is declined": "passed",
+    "out-of-stock product cannot be added to cart": "passed",
+    "checkout is disabled for an empty cart": "passed",
+    "login rejects a wrong password": "passed",
+    "v2 \"Add to Bag\" button still adds the product to the cart": "skipped"
+  },
+  "catalog.search_input_renamed": {
+    "user can search for a product, add it to cart, and complete checkout": "failed",
+    "expired payment card is declined": "passed",
+    "out-of-stock product cannot be added to cart": "passed",
+    "checkout is disabled for an empty cart": "passed",
+    "login rejects a wrong password": "passed",
+    "v2 \"Add to Bag\" button still adds the product to the cart": "skipped"
+  },
+  "cart.checkout_button_renamed": {
+    "user can search for a product, add it to cart, and complete checkout": "failed",
+    "expired payment card is declined": "passed",
+    "out-of-stock product cannot be added to cart": "passed",
+    "checkout is disabled for an empty cart": "failed",
+    "login rejects a wrong password": "passed",
+    "v2 \"Add to Bag\" button still adds the product to the cart": "skipped"
+  },
+  "order.place_order_renamed": {
+    "user can search for a product, add it to cart, and complete checkout": "failed",
+    "expired payment card is declined": "failed",
+    "out-of-stock product cannot be added to cart": "passed",
+    "checkout is disabled for an empty cart": "passed",
+    "login rejects a wrong password": "passed",
+    "v2 \"Add to Bag\" button still adds the product to the cart": "skipped"
+  },
+  "payment.pay_button_renamed": {
+    "user can search for a product, add it to cart, and complete checkout": "failed",
+    "expired payment card is declined": "failed",
+    "out-of-stock product cannot be added to cart": "passed",
+    "checkout is disabled for an empty cart": "passed",
+    "login rejects a wrong password": "passed",
+    "v2 \"Add to Bag\" button still adds the product to the cart": "skipped"
+  },
+  "catalog.add_button_wishlist": {
+    "user can search for a product, add it to cart, and complete checkout": "failed",
+    "expired payment card is declined": "passed",
+    "out-of-stock product cannot be added to cart": "passed",
+    "checkout is disabled for an empty cart": "passed",
+    "login rejects a wrong password": "passed",
+    "v2 \"Add to Bag\" button still adds the product to the cart": "skipped"
+  },
+  "cart.checkout_button_missing": {
+    "user can search for a product, add it to cart, and complete checkout": "failed",
+    "expired payment card is declined": "passed",
+    "out-of-stock product cannot be added to cart": "passed",
+    "checkout is disabled for an empty cart": "failed",
+    "login rejects a wrong password": "passed",
+    "v2 \"Add to Bag\" button still adds the product to the cart": "skipped"
+  },
+  "cart.total_doubled": {
+    "user can search for a product, add it to cart, and complete checkout": "failed",
+    "expired payment card is declined": "passed",
+    "out-of-stock product cannot be added to cart": "passed",
+    "checkout is disabled for an empty cart": "passed",
+    "login rejects a wrong password": "passed",
+    "v2 \"Add to Bag\" button still adds the product to the cart": "skipped"
+  },
+  "payment.expired_card_accepted": {
+    "user can search for a product, add it to cart, and complete checkout": "passed",
+    "expired payment card is declined": "failed",
+    "out-of-stock product cannot be added to cart": "passed",
+    "checkout is disabled for an empty cart": "passed",
+    "login rejects a wrong password": "passed",
+    "v2 \"Add to Bag\" button still adds the product to the cart": "skipped"
+  },
+  "catalog.out_of_stock_addable": {
+    "user can search for a product, add it to cart, and complete checkout": "passed",
+    "expired payment card is declined": "passed",
+    "out-of-stock product cannot be added to cart": "failed",
+    "checkout is disabled for an empty cart": "passed",
+    "login rejects a wrong password": "passed",
+    "v2 \"Add to Bag\" button still adds the product to the cart": "skipped"
+  },
+  "catalog.add_button_compare": {
+    "user can search for a product, add it to cart, and complete checkout": "failed",
+    "expired payment card is declined": "passed",
+    "out-of-stock product cannot be added to cart": "passed",
+    "checkout is disabled for an empty cart": "passed",
+    "login rejects a wrong password": "passed",
+    "v2 \"Add to Bag\" button still adds the product to the cart": "skipped"
+  }
+}

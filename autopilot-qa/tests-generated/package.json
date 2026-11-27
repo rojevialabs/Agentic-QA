@@ -1,0 +1,6 @@
+{
+  "name": "tests-generated",
+  "private": true,
+  "scripts": { "test": "playwright test", "test:support": "node --test support/fixtures.test.js" },
+  "devDependencies": { "@playwright/test": "^1.55.0" }
+}
